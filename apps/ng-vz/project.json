@@ -1,0 +1,36 @@
+{
+	"name": "ng-vz",
+	"$schema": "../../node_modules/nx/schemas/project-schema.json",
+	"sourceRoot": "apps/ng-vz/src",
+	"prefix": "vz",
+	"projectType": "library",
+	"tags": [],
+	"targets": {
+		"build": {
+			"executor": "@nx/angular:package",
+			"outputs": ["{workspaceRoot}/dist/{projectRoot}"],
+			"options": {
+				"project": "apps/ng-vz/ng-package.json"
+			},
+			"configurations": {
+				"production": {
+					"tsConfig": "apps/ng-vz/tsconfig.lib.prod.json"
+				},
+				"development": {
+					"tsConfig": "apps/ng-vz/tsconfig.lib.json"
+				}
+			},
+			"defaultConfiguration": "production"
+		},
+		"test": {
+			"executor": "@nx/vite:test",
+			"outputs": ["{options.reportsDirectory}"],
+			"options": {
+				"reportsDirectory": "../../coverage/apps/ng-vz"
+			}
+		},
+		"lint": {
+			"executor": "@nx/eslint:lint"
+		}
+	}
+}
