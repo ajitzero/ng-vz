@@ -1,9 +1,8 @@
-import { ChangeDetectionStrategy, Component, computed, forwardRef, inject, input } from '@angular/core';
-import { extent } from 'd3-array';
+import { ChangeDetectionStrategy, Component, computed, input, signal } from '@angular/core';
+import { extent, Primitive } from 'd3-array';
 import { scaleLinear } from 'd3-scale';
 import { line } from 'd3-shape';
-import { LineChart } from '../charts';
-import { CartesianChart } from '../charts/cartesian-chart';
+import { InnerBounds } from '../types';
 
 @Component({
 	selector: 'g[vzLine]',
@@ -41,13 +40,12 @@ import { CartesianChart } from '../charts/cartesian-chart';
 		style: 'display: contents',
 	},
 	changeDetection: ChangeDetectionStrategy.OnPush,
-	providers: [{ provide: CartesianChart, useClass: forwardRef(() => LineChart) }],
 })
 export class Line {
-	protected readonly chart = inject(CartesianChart);
-
-	protected readonly width = computed(() => this.chart.width());
-	protected readonly height = computed(() => this.chart.height());
+	public readonly width = signal<number>(0);
+	public readonly height = signal<number>(0);
+	public readonly innerBounds = signal<InnerBounds>({ innerHeight: 0, innerWidth: 0 });
+	public readonly data = signal<Record<string, Primitive>[]>([]);
 
 	public readonly dataKey = input.required<string>();
 
@@ -57,16 +55,19 @@ export class Line {
 	public readonly strokeLinejoin = input('round', { alias: 'stroke-linejoin' });
 
 	private readonly base = computed(() => {
-		const { innerWidth, innerHeight } = this.chart.innerBounds();
-		const data = this.chart.data().map(item => item[this.dataKey()] as number);
+		const { innerWidth, innerHeight } = this.innerBounds();
+		const data = this.data().map(item => item[this.dataKey()] as number);
+		const pointRadiusDelta = 10;
 
 		const xScale = scaleLinear()
 			.domain([0, data.length - 1])
-			.range([0, innerWidth]);
+			.range([pointRadiusDelta, innerWidth + pointRadiusDelta]);
 
 		const maybeDomain = extent(data);
 		const domain = maybeDomain.some(v => v === undefined) ? [0, 1] : (maybeDomain as [number, number]);
-		const yScale = scaleLinear().domain(domain).range([innerHeight, 0]);
+		const yScale = scaleLinear()
+			.domain(domain)
+			.range([innerHeight + pointRadiusDelta, pointRadiusDelta]);
 
 		return { data, xScale, yScale };
 	});
