@@ -54,8 +54,12 @@ export class ResponsiveContainer {
 	constructor() {
 		effect(() => {
 			const chart = this.chart();
+			// These signals are needed to trigger the effect
+			// eslint-disable-next-line @typescript-eslint/no-unused-vars
 			const _height = this.height();
+			// eslint-disable-next-line @typescript-eslint/no-unused-vars
 			const _width = this.width();
+			// eslint-disable-next-line @typescript-eslint/no-unused-vars
 			const _resizingEvent = this.resizingEvent();
 
 			if (chart) {
