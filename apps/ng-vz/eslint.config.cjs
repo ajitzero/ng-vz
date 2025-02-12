@@ -39,6 +39,8 @@ module.exports = [
 				},
 			],
 			'@angular-eslint/component-class-suffix': 'off',
+			'@angular-eslint/no-input-rename': 'off',
+			'@angular-eslint/component-selector': 'off',
 		},
 	},
 	{
