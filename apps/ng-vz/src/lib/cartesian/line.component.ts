@@ -1,8 +1,9 @@
-import { ChangeDetectionStrategy, Component, computed, input, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, input, output, signal } from '@angular/core';
 import { extent, Primitive } from 'd3-array';
 import { scaleLinear } from 'd3-scale';
-import { line } from 'd3-shape';
-import { InnerBounds } from '../types';
+import { curveCatmullRom, line } from 'd3-shape';
+import { DEFAULT_LINE_CHART_SETTINGS } from '../constants';
+import { InnerBounds, LineChartSettings } from '../types';
 
 @Component({
 	selector: 'g[vzLine]',
@@ -20,7 +21,7 @@ import { InnerBounds } from '../types';
 		@let _points = points();
 		@if (_points.length) {
 			<svg:g>
-				@for (point of _points; track $index) {
+				@for (point of _points; track $index; let i = $index) {
 					<circle
 						[attr.cx]="point.cx"
 						[attr.cy]="point.cy"
@@ -28,7 +29,10 @@ import { InnerBounds } from '../types';
 						[attr.width]="width()"
 						[attr.stroke]="stroke()"
 						[attr.stroke-width]="strokeWidth()"
-						r="3"
+						[attr.r]="hovering() - 1 === i ? activeDot() : '3'"
+						(mouseover)="hovering.set(i + 1)"
+						(mouseleave)="hovering.set(0)"
+						(click)="clicked.emit(data()[i])"
 						fill="#fff"
 					></circle>
 				}
@@ -53,19 +57,29 @@ export class Line {
 	public readonly strokeLinecap = input('round', { alias: 'stroke-linecap' });
 	public readonly strokeLinejoin = input('round', { alias: 'stroke-linejoin' });
 
+	public readonly defaultDot = input(3);
+	public readonly activeDot = input(3);
+	public readonly clicked = output<Record<string, Primitive>>();
+	protected readonly hovering = signal<number>(0);
+
+	public readonly vzSettings = input<LineChartSettings, Partial<LineChartSettings>>(DEFAULT_LINE_CHART_SETTINGS, {
+		transform: value => ({ ...DEFAULT_LINE_CHART_SETTINGS, ...value }),
+	});
+
 	private readonly base = computed(() => {
 		const { innerWidth, innerHeight } = this.innerBounds();
 		const data = this.data().map(item => item[this.dataKey()] as number);
 		const pointRadiusDelta = 5;
 
 		const xScale = scaleLinear()
-			.domain([0, data.length - 1])
+			.domain([-0.05, data.length - 1])
 			.range([pointRadiusDelta, innerWidth + pointRadiusDelta]);
 
 		const maybeDomain = extent(data);
-		const domain = maybeDomain.some(v => v === undefined) ? [0, 1] : (maybeDomain as [number, number]);
+		const [domainMin, domainMax] = maybeDomain.some(v => v === undefined) ? [0, 1] : (maybeDomain as [number, number]);
+		const buffer = (domainMax - domainMin) * 0.05;
 		const yScale = scaleLinear()
-			.domain(domain)
+			.domain([domainMin - buffer, domainMax + buffer])
 			.range([innerHeight + pointRadiusDelta, pointRadiusDelta]);
 
 		return { data, xScale, yScale };
@@ -73,11 +87,15 @@ export class Line {
 
 	protected readonly d = computed(() => {
 		const { data, xScale, yScale } = this.base();
+		const settings = this.vzSettings();
 
-		// Generate line path
-		const lineGenerator = line<number>()
+		let lineGenerator = line<number>()
 			.x((_, i) => xScale(i))
 			.y(d => yScale(d));
+
+		if (!settings.skipSmoothing) {
+			lineGenerator = lineGenerator.curve(curveCatmullRom);
+		}
 
 		return lineGenerator(data) ?? '';
 	});
@@ -85,6 +103,9 @@ export class Line {
 	protected readonly points = computed(() => {
 		const { data, xScale, yScale } = this.base();
 
-		return data.map((d, i) => ({ cx: xScale(i), cy: yScale(d) }));
+		return data.map((value, index) => ({
+			cx: xScale(index),
+			cy: yScale(value),
+		}));
 	});
 }
