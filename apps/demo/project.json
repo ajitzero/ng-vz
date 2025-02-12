@@ -15,14 +15,14 @@
 				"browser": "apps/demo/src/main.ts",
 				"polyfills": ["zone.js"],
 				"tsConfig": "apps/demo/tsconfig.app.json",
-				"inlineStyleLanguage": "scss",
+				"inlineStyleLanguage": "css",
 				"assets": [
 					{
 						"glob": "**/*",
 						"input": "apps/demo/public"
 					}
 				],
-				"styles": ["apps/demo/src/styles.scss"],
+				"styles": ["apps/demo/src/styles.css"],
 				"scripts": []
 			},
 			"configurations": {

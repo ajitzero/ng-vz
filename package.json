@@ -13,10 +13,12 @@
 		"@angular/platform-browser": "19.1.5",
 		"@angular/platform-browser-dynamic": "19.1.5",
 		"@angular/router": "19.1.5",
+		"@tailwindcss/postcss": "^4.0.6",
 		"d3-array": "^3.2.4",
 		"d3-scale": "^4.0.2",
 		"d3-shape": "^3.2.0",
 		"rxjs": "~7.8.1",
+		"tailwindcss": "^4.0.6",
 		"zone.js": "~0.15.0"
 	},
 	"devDependencies": {

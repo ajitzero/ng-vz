@@ -1,8 +1,13 @@
+@import 'tailwindcss';
+
 :root {
 	font-family: Inter, sans-serif;
 	font-feature-settings:
 		'liga' 1,
 		'calt' 1; /* fix for Chrome */
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
 }
 @supports (font-variation-settings: normal) {
 	:root {
@@ -14,20 +19,4 @@
 *::before,
 *::after {
 	box-sizing: border-box;
-	margin: 0;
-	padding: 0;
-}
-
-.contents {
-	display: contents;
-}
-
-.m-1 {
-	margin: 1rem;
-}
-.p-1 {
-	padding: 1rem;
-}
-.outline {
-	outline: 1px solid #aaa;
 }

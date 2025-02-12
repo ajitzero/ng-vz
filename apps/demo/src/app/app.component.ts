@@ -9,11 +9,15 @@ import { MOCK_DATA } from './mocks';
 	imports: [RouterModule, LineChart, Line, ResponsiveContainer],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	template: `
-		<div class="p-1">
-			<h1>TinyLineChart</h1>
-			<a href="https://recharts.org/en-US/examples/TinyLineChart">TinyLineChart | Recharts</a>
+		<div class="mx-auto max-w-3xl px-5 pt-20 pb-10">
+			<hgroup class="pb-10">
+				<h1 class="text-4xl font-extrabold">TinyLineChart</h1>
+				<a class="text-blue-600 underline hover:text-blue-800" href="https://recharts.org/en-US/examples/TinyLineChart">
+					TinyLineChart | Recharts
+				</a>
+			</hgroup>
 
-			<h2>Default</h2>
+			<h2 class="pt-10 pb-2 text-2xl font-bold">Default</h2>
 			<vz-line-chart class="outline" [height]="300" [width]="600" [data]="data">
 				<ng-container vzTitle>Simple Line Chart 1</ng-container>
 				<ng-container vzDesc>A sample chart for demonstrating the usage of the ng-vz library.</ng-container>
@@ -22,9 +26,7 @@ import { MOCK_DATA } from './mocks';
 				<g vzLine dataKey="pv" stroke="darkblue" stroke-width="3"></g>
 			</vz-line-chart>
 
-			<hr class="m-1" />
-
-			<h2>Sharp</h2>
+			<h2 class="pt-10 pb-2 text-2xl font-bold">Sharp</h2>
 
 			<vz-line-chart class="outline" [height]="300" [width]="600" [data]="data">
 				<ng-container vzTitle>Simple Line Chart 1</ng-container>
@@ -34,9 +36,7 @@ import { MOCK_DATA } from './mocks';
 				<g [vzSettings]="{ skipSmoothing: true }" vzLine dataKey="pv" stroke="darkblue" stroke-width="3"></g>
 			</vz-line-chart>
 
-			<hr class="m-1" />
-
-			<h2>Mixed</h2>
+			<h2 class="pt-10 pb-2 text-2xl font-bold">Mixed</h2>
 
 			<vz-line-chart class="outline" [height]="300" [width]="600" [data]="data">
 				<ng-container vzTitle>Simple Line Chart 1</ng-container>
@@ -45,10 +45,9 @@ import { MOCK_DATA } from './mocks';
 				<g [vzSettings]="{ skipSmoothing: false }" vzLine dataKey="uv" stroke="blue" stroke-width="2"></g>
 				<g [vzSettings]="{ skipSmoothing: true }" vzLine dataKey="pv" stroke="darkblue" stroke-width="3"></g>
 			</vz-line-chart>
-
-			<hr class="m-1" />
-
-			<h2>With Responsive Container</h2>
+		</div>
+		<div class="px-5 pb-10">
+			<h2 class="pt-10 pb-2 text-2xl font-bold">With Responsive Container</h2>
 			<div style="position: relative; width: 100%; height: 350px">
 				<vz-responsive-container class="outline">
 					<vz-line-chart [height]="450" [width]="600" [data]="data">
