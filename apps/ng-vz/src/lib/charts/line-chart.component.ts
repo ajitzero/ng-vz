@@ -1,4 +1,12 @@
-import { ChangeDetectionStrategy, Component, computed, contentChildren, effect, input } from '@angular/core';
+import {
+	ChangeDetectionStrategy,
+	Component,
+	computed,
+	contentChildren,
+	effect,
+	input,
+	linkedSignal,
+} from '@angular/core';
 import type { Primitive } from 'd3-array';
 import { Line } from '../cartesian';
 import { DEFAULT_GAPS } from '../constants';
@@ -8,7 +16,7 @@ import { CartesianChart } from './cartesian-chart';
 @Component({
 	selector: 'vz-line-chart',
 	template: `
-		<svg [attr.viewBox]="viewBox()" [attr.width]="width()" [attr.height]="height()">
+		<svg [attr.viewBox]="viewBox()" [attr.width]="__width()" [attr.height]="__height()">
 			<svg:title><ng-content select="[vzTitle]"></ng-content></svg:title>
 			<desc><ng-content select="[vzDesc]"></ng-content></desc>
 
@@ -23,6 +31,7 @@ import { CartesianChart } from './cartesian-chart';
 })
 export class LineChart implements CartesianChart {
 	public readonly data = input.required<Record<string, Primitive>[]>();
+
 	public readonly height = input.required<number>();
 	public readonly width = input.required<number>();
 	public readonly gap = input<GapInput, Partial<GapInput> | number>(DEFAULT_GAPS, {
@@ -34,36 +43,51 @@ export class LineChart implements CartesianChart {
 		},
 	});
 
+	public readonly _height = linkedSignal(() => this.height());
+	public readonly _width = linkedSignal(() => this.width());
+
+	public readonly __height = computed(() => {
+		const height = this._height();
+		const gap = this.gap();
+
+		return height - gap.top - gap.bottom;
+	});
+	public readonly __width = computed(() => {
+		const width = this._width();
+		const gap = this.gap();
+
+		return width - gap.left - gap.right;
+	});
+
 	private lines = contentChildren(Line);
 
 	protected readonly hostStyle = computed(() => {
-		const height = this.height();
-		const width = this.width();
+		const height = this._height();
+		const width = this._width();
 		const gap = this.gap();
-
-		const padding = [gap.top, gap.right, gap.bottom, gap.left].map(value => `${value}px`).join(' ');
 
 		return {
 			display: 'block',
-			boxSizing: 'content-box',
-			padding,
+			padding: [gap.top, gap.right, gap.bottom, gap.left].map(value => `${value}px`).join(' '),
 			width: '100%',
 			height: '100%',
 			maxHeight: `${height}px`,
 			maxWidth: `${width}px`,
-			outline: '1px solid #aaa',
 		};
 	});
 
-	protected readonly viewBox = computed(() => `0 0 ${this.width()} ${this.height()}`);
+	protected readonly viewBox = computed(() => {
+		const height = this.__height();
+		const width = this.__width();
+
+		return `0 0 ${width} ${height}`;
+	});
 
 	public readonly innerBounds = computed(() => {
-		const width = this.width();
-		const height = this.height();
+		const width = this.__width();
+		const height = this.__height();
 		const gap = this.gap();
-		// const lines = this.lines();
 
-		// const pointRadius = Math.max(...lines.map(line => +line.strokeWidth()));
 		const innerWidth = Math.max(0, width - gap.left - gap.right);
 		const innerHeight = Math.max(0, height - gap.top - gap.bottom);
 
@@ -78,10 +102,10 @@ export class LineChart implements CartesianChart {
 			}
 
 			for (const line of lines) {
-				line.width.set(this.width());
-				line.height.set(this.height());
-				line.innerBounds.set(this.innerBounds());
-				line.data.set(this.data());
+				line?.width?.set(this.__width());
+				line?.height?.set(this.__height());
+				line?.innerBounds?.set(this.innerBounds());
+				line?.data?.set(this.data());
 			}
 		});
 	}

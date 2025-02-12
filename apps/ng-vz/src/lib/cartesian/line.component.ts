@@ -19,10 +19,9 @@ import { InnerBounds } from '../types';
 		></svg:path>
 		@let _points = points();
 		@if (_points.length) {
-			<svg:g class="recharts-layer recharts-line-dots">
+			<svg:g>
 				@for (point of _points; track $index) {
 					<circle
-						class="recharts-dot recharts-line-dot"
 						[attr.cx]="point.cx"
 						[attr.cy]="point.cy"
 						[attr.height]="height()"
@@ -57,7 +56,7 @@ export class Line {
 	private readonly base = computed(() => {
 		const { innerWidth, innerHeight } = this.innerBounds();
 		const data = this.data().map(item => item[this.dataKey()] as number);
-		const pointRadiusDelta = 10;
+		const pointRadiusDelta = 5;
 
 		const xScale = scaleLinear()
 			.domain([0, data.length - 1])
@@ -86,9 +85,6 @@ export class Line {
 	protected readonly points = computed(() => {
 		const { data, xScale, yScale } = this.base();
 
-		return data.map((d, i) => ({
-			cx: xScale(i),
-			cy: yScale(d),
-		}));
+		return data.map((d, i) => ({ cx: xScale(i), cy: yScale(d) }));
 	});
 }
