@@ -1,0 +1,22 @@
+@import 'tailwindcss';
+
+:root {
+	font-family: Inter, sans-serif;
+	font-feature-settings:
+		'liga' 1,
+		'calt' 1; /* fix for Chrome */
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+}
+@supports (font-variation-settings: normal) {
+	:root {
+		font-family: InterVariable, sans-serif;
+	}
+}
+
+/* html,
+body {
+	display: block;
+	height: 100%;
+} */
