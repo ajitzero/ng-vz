@@ -14,9 +14,10 @@ import { InnerBounds, LineChartSettings } from '../types';
 			[attr.stroke]="stroke()"
 			[attr.stroke-width]="strokeWidth()"
 			[attr.d]="d()"
+			[attr.stroke-linecap]="strokeLinecap()"
+			[attr.stroke-linejoin]="strokeLinejoin()"
+			[attr.stroke-dasharray]="strokeDasharray()"
 			fill="none"
-			stroke-linecap="round"
-			stroke-linejoin="round"
 		></svg:path>
 		@let _points = points();
 		@if (_points.length) {
@@ -56,6 +57,7 @@ export class Line {
 	public readonly strokeWidth = input('2', { alias: 'stroke-width' });
 	public readonly strokeLinecap = input('round', { alias: 'stroke-linecap' });
 	public readonly strokeLinejoin = input('round', { alias: 'stroke-linejoin' });
+	public readonly strokeDasharray = input('', { alias: 'stroke-dasharray' });
 
 	public readonly defaultDot = input(3);
 	public readonly activeDot = input(3);

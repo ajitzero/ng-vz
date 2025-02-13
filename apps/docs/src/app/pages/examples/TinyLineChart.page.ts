@@ -6,7 +6,6 @@ import { MOCK_DATA } from '../../mocks';
 
 export const routeMeta: RouteMeta = {
 	title: 'TinyLineChart | Examples | ng-vz',
-	// canActivate: [() => true],
 };
 
 @Component({
@@ -15,7 +14,7 @@ export const routeMeta: RouteMeta = {
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	template: `
 		<div class="mx-auto max-w-3xl px-5 pt-20 pb-10">
-			<hgroup class="flex flex-col gap-2 pb-10">
+			<hgroup class="flex flex-col items-start gap-2 pb-10">
 				<h1 class="pb-5 text-4xl font-extrabold">TinyLineChart</h1>
 				<a
 					class="text-blue-600 underline hover:text-blue-800"
@@ -66,9 +65,7 @@ export const routeMeta: RouteMeta = {
 						<ng-container vzDesc>A sample chart for demonstrating the usage of the ng-vz library.</ng-container>
 
 						<g [vzSettings]="{ skipSmoothing: false }" vzLine dataKey="uv" stroke="blue" stroke-width="2"></g>
-						<g [vzSettings]="{ skipSmoothing: true }" vzLine dataKey="uv" stroke="blue" stroke-width="2"></g>
 						<g [vzSettings]="{ skipSmoothing: true }" vzLine dataKey="pv" stroke="darkblue" stroke-width="3"></g>
-						<g [vzSettings]="{ skipSmoothing: false }" vzLine dataKey="pv" stroke="darkblue" stroke-width="3"></g>
 					</vz-line-chart>
 				</vz-responsive-container>
 			</div>
@@ -84,10 +81,11 @@ export const routeMeta: RouteMeta = {
 						<ng-container vzTitle>Tiny Line Chart (Mixed Lines)</ng-container>
 						<ng-container vzDesc>A sample chart for demonstrating the usage of the ng-vz library.</ng-container>
 
-						<g [vzSettings]="{ skipSmoothing: false }" vzLine dataKey="uv" stroke="blue" stroke-width="2"></g>
+						<g vzLine dataKey="uv" stroke="blue" stroke-width="2"></g>
 						<g [vzSettings]="{ skipSmoothing: true }" vzLine dataKey="uv" stroke="darkblue" stroke-width="2"></g>
-						<g [vzSettings]="{ skipSmoothing: true }" vzLine dataKey="pv" stroke="blue" stroke-width="3"></g>
-						<g [vzSettings]="{ skipSmoothing: false }" vzLine dataKey="pv" stroke="darkblue" stroke-width="3"></g>
+						<g [vzSettings]="{ skipSmoothing: true }" vzLine dataKey="pv" stroke="orange" stroke-width="3"></g>
+						<g vzLine dataKey="jv" stroke="darkgreen" stroke-width="3" stroke-dasharray="5,5"></g>
+						<g vzLine dataKey="kv" stroke="red" stroke-width="2" stroke-dasharray="2,4"></g>
 					</vz-line-chart>
 				</vz-responsive-container>
 			</div>
@@ -112,6 +110,14 @@ export const routeMeta: RouteMeta = {
 							stroke-width="2"
 						></g>
 						<g [activeDot]="8" (clicked)="handleClick($event)" vzLine dataKey="uv" stroke="blue" stroke-width="3"></g>
+						<g
+							[vzSettings]="{ skipSmoothing: true }"
+							vzLine
+							dataKey="kv"
+							stroke="red"
+							stroke-width="2"
+							stroke-dasharray="2,4"
+						></g>
 					</vz-line-chart>
 				</vz-responsive-container>
 			</div>
@@ -119,8 +125,14 @@ export const routeMeta: RouteMeta = {
 	`,
 })
 export default class TinyComponent {
-	data = MOCK_DATA;
-	longerData = [...MOCK_DATA, ...MOCK_DATA];
+	basedata = MOCK_DATA;
+	reversedData = [...MOCK_DATA].reverse();
+	data = MOCK_DATA.map((item, index) => ({
+		...item,
+		jv: this.reversedData[index].uv,
+		kv: this.reversedData[index].pv,
+	}));
+	longerData = [...this.data, ...this.data];
 
 	handleClick(data: Record<string, Primitive>) {
 		window.alert(JSON.stringify(data));
