@@ -23,45 +23,32 @@ import { Component } from '@angular/core';
 						Follow along on Twitter
 					</a>
 					<h1 class="font-heading text-3xl font-medium sm:text-5xl md:text-6xl lg:text-7xl">
-						<span class="text-[#DD0031]">Analog.</span>
-						The fullstack Angular meta-framework
+						<span class="text-[#DD0031]">ng-vz.</span>
+						Composable Angular directives for visualisations.
 					</h1>
 					<p class="text-muted-foreground max-w-[42rem] leading-normal sm:text-xl sm:leading-8">
-						Analog is for building applications and websites with Angular.
+						Porting from Recharts (now) & airbnb/visx (eventually?)
 						<br />
-						Powered by Vite.
+						Powered by Spite.
+						<!-- <br /> -->
+						<!-- Examples inspired from Tremor. -->
 					</p>
 					<div class="space-x-4">
 						<a
 							class="focus-visible:ring-ring ring-offset-background inline-flex h-11 items-center justify-center rounded-md bg-zinc-950 px-8 text-sm font-medium text-zinc-50 transition-colors hover:bg-zinc-950/90 focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none disabled:pointer-events-none disabled:opacity-50"
-							href="https://analogjs.org"
+							href="/examples/TinyLineChart"
 						>
-							Read the docs
+							TinyLineChart
 						</a>
 						<a
 							class="focus-visible:ring-ring ring-offset-background border-input inline-flex h-11 items-center justify-center rounded-md border px-8 text-sm font-medium transition-colors hover:bg-zinc-100 hover:text-zinc-950 focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none disabled:pointer-events-none disabled:opacity-50"
 							target="_blank"
 							rel="noreferrer"
-							href="https://github.com/analogjs/analog"
+							href="https://github.com/ajitzero/ng-vz"
 						>
 							Star on GitHub
 						</a>
 					</div>
-				</div>
-			</section>
-			<section class="container py-8 md:py-12 lg:py-24" id="counter-demo">
-				<div class="mx-auto flex max-w-[58rem] flex-col items-center justify-center gap-4 text-center">
-					<h2 class="text-3xl leading-[1.1] font-medium text-[#DD0031]">Counter</h2>
-					<p class="text-muted-foreground max-w-[85%] leading-normal sm:text-lg sm:leading-7">
-						This is a simple interactive counter. Powered by Angular.
-					</p>
-					<button
-						class="focus-visible:ring-ring ring-offset-background border-input inline-flex h-11 items-center justify-center rounded-md border px-8 text-sm font-medium transition-colors hover:bg-zinc-100 hover:text-zinc-950 focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none disabled:pointer-events-none disabled:opacity-50"
-						(click)="increment()"
-					>
-						Count:
-						<span class="ml-1 font-mono">{{ count }}</span>
-					</button>
 				</div>
 			</section>
 		</main>
