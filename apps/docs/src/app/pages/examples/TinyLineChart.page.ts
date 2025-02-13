@@ -17,14 +17,14 @@ export const routeMeta: RouteMeta = {
 			<hgroup class="flex flex-col items-start gap-2 pb-10">
 				<h1 class="pb-5 text-4xl font-extrabold">TinyLineChart</h1>
 				<a
-					class="text-blue-600 underline hover:text-blue-800"
+					class="text-emerald-600 underline visited:text-emerald-900 hover:text-emerald-700"
 					href="https://recharts.org/en-US/examples/TinyLineChart"
 					target="_blank"
 				>
 					Recharts Docs &#x2197;
 				</a>
 				<a
-					class="text-blue-600 underline hover:text-blue-800"
+					class="text-emerald-600 underline visited:text-emerald-900 hover:text-emerald-700"
 					href="https://github.com/ajitzero/ng-vz/blob/main/apps/docs/src/app/pages/examples/TinyLineChart.page.ts"
 				>
 					View Source Code &#x2197;
@@ -92,13 +92,14 @@ export const routeMeta: RouteMeta = {
 		</div>
 		<div class="px-5 pb-10">
 			<h2 class="pt-10 pb-2 text-2xl font-bold">With Responsive Container</h2>
-			<p class="pb-10">
+			<p class="pb-1">
 				A responsive container uses position absolute, so it requires a parent element with a defined width and height.
 			</p>
+			<p class="pb-10">You can click on the dots to see the data point in this example.</p>
 			<div class="relative h-[350px] w-full">
 				<vz-responsive-container class="outline">
 					<vz-line-chart [height]="450" [width]="600" [data]="longerData">
-						<ng-container vzTitle>Simple Line Chart 2</ng-container>
+						<ng-container vzTitle>Tiny Line Chart within a Responsive Container</ng-container>
 						<ng-container vzDesc>A sample chart for demonstrating the usage of the ng-vz library.</ng-container>
 
 						<g
@@ -112,6 +113,8 @@ export const routeMeta: RouteMeta = {
 						<g [activeDot]="8" (clicked)="handleClick($event)" vzLine dataKey="uv" stroke="blue" stroke-width="3"></g>
 						<g
 							[vzSettings]="{ skipSmoothing: true }"
+							[activeDot]="8"
+							(clicked)="handleClick($event)"
 							vzLine
 							dataKey="kv"
 							stroke="red"

@@ -23,22 +23,22 @@ import { Component } from '@angular/core';
 						Follow along on Twitter
 					</a>
 					<h1 class="font-heading text-3xl font-medium sm:text-5xl md:text-6xl lg:text-7xl">
-						<span class="text-[#DD0031]">ng-vz.</span>
+						<span class="text-emerald-600">ng-vz.</span>
 						Composable Angular directives for visualisations.
 					</h1>
 					<p class="text-muted-foreground max-w-[42rem] leading-normal sm:text-xl sm:leading-8">
 						Porting from Recharts (now) & airbnb/visx (eventually?)
 						<br />
-						Powered by Spite.
+						Powered by ✨Spite✨
 						<!-- <br /> -->
 						<!-- Examples inspired from Tremor. -->
 					</p>
 					<div class="space-x-4">
 						<a
 							class="focus-visible:ring-ring ring-offset-background inline-flex h-11 items-center justify-center rounded-md bg-zinc-950 px-8 text-sm font-medium text-zinc-50 transition-colors hover:bg-zinc-950/90 focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none disabled:pointer-events-none disabled:opacity-50"
-							href="/examples/TinyLineChart"
+							href="/examples"
 						>
-							TinyLineChart
+							Examples
 						</a>
 						<a
 							class="focus-visible:ring-ring ring-offset-background border-input inline-flex h-11 items-center justify-center rounded-md border px-8 text-sm font-medium transition-colors hover:bg-zinc-100 hover:text-zinc-950 focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none disabled:pointer-events-none disabled:opacity-50"
