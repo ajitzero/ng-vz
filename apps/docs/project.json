@@ -48,6 +48,9 @@
 		"test": {
 			"executor": "@analogjs/vitest-angular:test",
 			"outputs": ["{projectRoot}/coverage"]
+		},
+		"lint": {
+			"executor": "@nx/eslint:lint"
 		}
 	},
 	"tags": [],
