@@ -40,9 +40,6 @@ import { InnerBounds, LineChartSettings } from '../types';
 			</svg:g>
 		}
 	`,
-	host: {
-		style: 'display: contents',
-	},
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Line {

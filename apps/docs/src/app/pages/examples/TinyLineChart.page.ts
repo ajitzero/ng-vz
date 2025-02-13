@@ -38,8 +38,8 @@ export const routeMeta: RouteMeta = {
 						<ng-container vzTitle>Tiny Line Chart (Default, Curved Lines)</ng-container>
 						<ng-container vzDesc>A sample chart for demonstrating the usage of the ng-vz library.</ng-container>
 
-						<g vzLine dataKey="uv" stroke="blue" stroke-width="2"></g>
-						<g vzLine dataKey="pv" stroke="darkblue" stroke-width="3"></g>
+						<svg:g vzLine dataKey="uv" stroke="blue" stroke-width="2"></svg:g>
+						<svg:g vzLine dataKey="pv" stroke="darkblue" stroke-width="3"></svg:g>
 					</vz-line-chart>
 				</vz-responsive-container>
 			</div>
@@ -51,8 +51,14 @@ export const routeMeta: RouteMeta = {
 						<ng-container vzTitle>Tiny Line Chart (Sharp Lines)</ng-container>
 						<ng-container vzDesc>A sample chart for demonstrating the usage of the ng-vz library.</ng-container>
 
-						<g [vzSettings]="{ skipSmoothing: true }" vzLine dataKey="uv" stroke="blue" stroke-width="2"></g>
-						<g [vzSettings]="{ skipSmoothing: true }" vzLine dataKey="pv" stroke="darkblue" stroke-width="3"></g>
+						<svg:g [vzSettings]="{ skipSmoothing: true }" vzLine dataKey="uv" stroke="blue" stroke-width="2"></svg:g>
+						<svg:g
+							[vzSettings]="{ skipSmoothing: true }"
+							vzLine
+							dataKey="pv"
+							stroke="darkblue"
+							stroke-width="3"
+						></svg:g>
 					</vz-line-chart>
 				</vz-responsive-container>
 			</div>
@@ -64,8 +70,14 @@ export const routeMeta: RouteMeta = {
 						<ng-container vzTitle>Tiny Line Chart (Mixed Lines)</ng-container>
 						<ng-container vzDesc>A sample chart for demonstrating the usage of the ng-vz library.</ng-container>
 
-						<g [vzSettings]="{ skipSmoothing: false }" vzLine dataKey="uv" stroke="blue" stroke-width="2"></g>
-						<g [vzSettings]="{ skipSmoothing: true }" vzLine dataKey="pv" stroke="darkblue" stroke-width="3"></g>
+						<svg:g [vzSettings]="{ skipSmoothing: false }" vzLine dataKey="uv" stroke="blue" stroke-width="2"></svg:g>
+						<svg:g
+							[vzSettings]="{ skipSmoothing: true }"
+							vzLine
+							dataKey="pv"
+							stroke="darkblue"
+							stroke-width="3"
+						></svg:g>
 					</vz-line-chart>
 				</vz-responsive-container>
 			</div>
@@ -81,11 +93,17 @@ export const routeMeta: RouteMeta = {
 						<ng-container vzTitle>Tiny Line Chart (Mixed Lines)</ng-container>
 						<ng-container vzDesc>A sample chart for demonstrating the usage of the ng-vz library.</ng-container>
 
-						<g vzLine dataKey="uv" stroke="blue" stroke-width="2"></g>
-						<g [vzSettings]="{ skipSmoothing: true }" vzLine dataKey="uv" stroke="darkblue" stroke-width="2"></g>
-						<g [vzSettings]="{ skipSmoothing: true }" vzLine dataKey="pv" stroke="orange" stroke-width="3"></g>
-						<g vzLine dataKey="jv" stroke="darkgreen" stroke-width="3" stroke-dasharray="5,5"></g>
-						<g vzLine dataKey="kv" stroke="red" stroke-width="2" stroke-dasharray="2,4"></g>
+						<svg:g vzLine dataKey="uv" stroke="blue" stroke-width="2"></svg:g>
+						<svg:g
+							[vzSettings]="{ skipSmoothing: true }"
+							vzLine
+							dataKey="uv"
+							stroke="darkblue"
+							stroke-width="2"
+						></svg:g>
+						<svg:g [vzSettings]="{ skipSmoothing: true }" vzLine dataKey="pv" stroke="orange" stroke-width="3"></svg:g>
+						<svg:g vzLine dataKey="jv" stroke="darkgreen" stroke-width="3" stroke-dasharray="5,5"></svg:g>
+						<svg:g vzLine dataKey="kv" stroke="red" stroke-width="2" stroke-dasharray="2,4"></svg:g>
 					</vz-line-chart>
 				</vz-responsive-container>
 			</div>
@@ -102,16 +120,23 @@ export const routeMeta: RouteMeta = {
 						<ng-container vzTitle>Tiny Line Chart within a Responsive Container</ng-container>
 						<ng-container vzDesc>A sample chart for demonstrating the usage of the ng-vz library.</ng-container>
 
-						<g
+						<svg:g
 							[activeDot]="8"
 							(clicked)="handleClick($event)"
 							vzLine
 							dataKey="pv"
 							stroke="darkblue"
 							stroke-width="2"
-						></g>
-						<g [activeDot]="8" (clicked)="handleClick($event)" vzLine dataKey="uv" stroke="blue" stroke-width="3"></g>
-						<g
+						></svg:g>
+						<svg:g
+							[activeDot]="8"
+							(clicked)="handleClick($event)"
+							vzLine
+							dataKey="uv"
+							stroke="blue"
+							stroke-width="3"
+						></svg:g>
+						<svg:g
 							[vzSettings]="{ skipSmoothing: true }"
 							[activeDot]="8"
 							(clicked)="handleClick($event)"
@@ -120,7 +145,7 @@ export const routeMeta: RouteMeta = {
 							stroke="red"
 							stroke-width="2"
 							stroke-dasharray="2,4"
-						></g>
+						></svg:g>
 					</vz-line-chart>
 				</vz-responsive-container>
 			</div>
