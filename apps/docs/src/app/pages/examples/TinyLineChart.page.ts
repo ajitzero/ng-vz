@@ -1,7 +1,7 @@
 import { RouteMeta } from '@analogjs/router';
-import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { Primitive } from 'd3-array';
-import { Line, LineChart, ResponsiveContainer } from 'ng-vz';
+import { DOCUMENT } from '@angular/common';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { DataPointClickEvent, Line, LineChart, ResponsiveContainer } from 'ng-vz';
 import { MOCK_DATA } from '../../mocks';
 
 export const routeMeta: RouteMeta = {
@@ -153,16 +153,23 @@ export const routeMeta: RouteMeta = {
 	`,
 })
 export default class TinyComponent {
-	basedata = MOCK_DATA;
-	reversedData = [...MOCK_DATA].reverse();
-	data = MOCK_DATA.map((item, index) => ({
+	private readonly document = inject(DOCUMENT);
+	private readonly window = this.document.defaultView;
+
+	private readonly baseData = MOCK_DATA;
+	private readonly reversedData = [...this.baseData].reverse();
+
+	protected readonly data = this.baseData.map((item, index) => ({
 		...item,
 		jv: this.reversedData[index].uv,
 		kv: this.reversedData[index].pv,
 	}));
-	longerData = [...this.data, ...this.data];
 
-	handleClick(data: Record<string, Primitive>) {
-		window.alert(JSON.stringify(data));
+	protected readonly longerData = [...this.data, ...this.data];
+
+	protected handleClick(data: DataPointClickEvent) {
+		if (this.window) {
+			this.window.alert(JSON.stringify(data));
+		}
 	}
 }

@@ -3,7 +3,7 @@ import { extent, Primitive } from 'd3-array';
 import { scaleLinear } from 'd3-scale';
 import { curveCatmullRom, line } from 'd3-shape';
 import { DEFAULT_LINE_CHART_SETTINGS } from '../constants';
-import { InnerBounds, LineChartSettings } from '../types';
+import { DataPointClickEvent, InnerBounds, LineChartSettings } from '../types';
 
 @Component({
 	selector: 'g[vzLine]',
@@ -33,7 +33,7 @@ import { InnerBounds, LineChartSettings } from '../types';
 						[attr.r]="hovering() - 1 === i ? activeDot() : '3'"
 						(mouseover)="hovering.set(i + 1)"
 						(mouseleave)="hovering.set(0)"
-						(click)="clicked.emit(data()[i])"
+						(click)="clicked.emit({ data: data()[i], key: dataKey() })"
 						fill="#fff"
 					></circle>
 				}
@@ -58,7 +58,9 @@ export class Line {
 
 	public readonly defaultDot = input(3);
 	public readonly activeDot = input(3);
-	public readonly clicked = output<Record<string, Primitive>>();
+
+	public readonly clicked = output<DataPointClickEvent>();
+
 	protected readonly hovering = signal<number>(0);
 
 	public readonly vzSettings = input<LineChartSettings, Partial<LineChartSettings>>(DEFAULT_LINE_CHART_SETTINGS, {
