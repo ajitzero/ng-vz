@@ -1,1 +1,1 @@
-export * from './line-chart.component';
+export * from './cartesian-chart.component';

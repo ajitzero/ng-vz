@@ -1,23 +1,19 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
+import { ExamplesMenuComponent } from '../components/examples-menu.component';
+import { HeaderComponent } from '../components/header.component';
 
 @Component({
 	standalone: true,
-	imports: [RouterOutlet],
+	imports: [RouterOutlet, ExamplesMenuComponent, HeaderComponent],
 	template: `
-		<div class="flex justify-between bg-emerald-300 p-5">
-			<a class="text-emerald-950 underline hover:text-emerald-800" href="/"><- Back Home</a>
-			<h2>Examples</h2>
-			<a
-				class="text-emerald-950 underline hover:text-emerald-800"
-				href="https://github.com/ajitzero/ng-vz/blob/main/apps/docs/src/app/pages/examples"
-			>
-				GitHub
-			</a>
+		<docs-header />
+		<div class="md:flex">
+			<docs-examples-menu />
+			<main class="grow-1">
+				<router-outlet></router-outlet>
+			</main>
 		</div>
-		<main>
-			<router-outlet></router-outlet>
-		</main>
 	`,
 })
 export default class ExamplesComponent {}

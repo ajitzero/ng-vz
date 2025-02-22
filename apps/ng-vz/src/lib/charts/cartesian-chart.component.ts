@@ -11,7 +11,6 @@ import type { Primitive } from 'd3-array';
 import { Line } from '../cartesian';
 import { DEFAULT_GAPS } from '../constants';
 import type { GapInput } from '../types';
-import { BaseCartesianChart } from './cartesian-chart';
 
 @Component({
 	selector: 'vz-cartesian-chart',
@@ -29,7 +28,7 @@ import { BaseCartesianChart } from './cartesian-chart';
 		'[style]': 'hostStyle()',
 	},
 })
-export class CartesianChart implements BaseCartesianChart {
+export class CartesianChart {
 	/**
 	 * @internal
 	 */
@@ -64,7 +63,7 @@ export class CartesianChart implements BaseCartesianChart {
 	/**
 	 * These are used to allow the chart to be resized dynamically.
 	 *
-	 * @see ResponsiveContainer
+	 * @see {@link ResponsiveContainer}
 	 *
 	 * @internal
 	 */
@@ -72,7 +71,7 @@ export class CartesianChart implements BaseCartesianChart {
 	/**
 	 * These are used to allow the chart to be resized dynamically.
 	 *
-	 * @see ResponsiveContainer
+	 * @see {@link ResponsiveContainer}
 	 *
 	 * @internal
 	 */

@@ -5,7 +5,7 @@ import { CartesianChart, DataPointClickEvent, Line, ResponsiveContainer } from '
 import { MOCK_DATA } from '../../mocks';
 
 export const routeMeta: RouteMeta = {
-	title: 'TinyLineChart | Examples | ng-vz',
+	title: 'SimpleLineChart | Examples | ng-vz',
 };
 
 @Component({
@@ -14,17 +14,17 @@ export const routeMeta: RouteMeta = {
 	template: `
 		<div class="mx-auto max-w-3xl px-5 pt-20 pb-10">
 			<hgroup class="flex flex-col items-start gap-2 pb-10">
-				<h1 class="pb-5 text-4xl font-extrabold">TinyLineChart</h1>
+				<h1 class="pb-5 text-4xl font-extrabold">SimpleLineChart</h1>
 				<a
 					class="text-emerald-600 underline visited:text-emerald-900 hover:text-emerald-700"
-					href="https://recharts.org/en-US/examples/TinyLineChart"
+					href="https://recharts.org/en-US/examples/SimpleLineChart"
 					target="_blank"
 				>
 					Recharts Docs &#x2197;
 				</a>
 				<a
 					class="text-emerald-600 underline visited:text-emerald-900 hover:text-emerald-700"
-					href="https://github.com/ajitzero/ng-vz/blob/main/apps/docs/src/app/pages/examples/TinyLineChart.page.ts"
+					href="https://github.com/ajitzero/ng-vz/blob/main/apps/docs/src/app/pages/examples/SimpleLineChart.page.ts"
 				>
 					View Source Code &#x2197;
 				</a>
@@ -158,7 +158,7 @@ export const routeMeta: RouteMeta = {
 		</div>
 	`,
 })
-export default class TinyLineChartComponent {
+export default class SimpleLineChartComponent {
 	private readonly document = inject(DOCUMENT);
 	private readonly window = this.document.defaultView;
 

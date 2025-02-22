@@ -6,44 +6,29 @@ import { DEFAULT_LINE_CHART_SETTINGS } from '../constants';
 import { DataPointClickEvent, InnerBounds, LineChartSettings } from '../types';
 
 @Component({
-	selector: 'g[vzLine]',
+	selector: 'g[vzXAxis]',
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	template: `
-		<svg:path
+		<svg:line
 			[attr.height]="height()"
 			[attr.width]="width()"
 			[attr.stroke]="stroke()"
 			[attr.stroke-width]="strokeWidth()"
-			[attr.d]="d()"
 			[attr.stroke-linecap]="strokeLinecap()"
 			[attr.stroke-linejoin]="strokeLinejoin()"
 			[attr.stroke-dasharray]="strokeDasharray()"
+			orientation="bottom"
 			fill="none"
-		></svg:path>
-		@let _points = points();
-		@if (_points.length) {
-			<svg:g>
-				@for (point of _points; track $index; let i = $index) {
-					<svg:circle
-						[attr.cx]="point.cx"
-						[attr.cy]="point.cy"
-						[attr.height]="height()"
-						[attr.width]="width()"
-						[attr.stroke]="stroke()"
-						[attr.stroke-width]="strokeWidth()"
-						[attr.r]="hovering() - 1 === i ? activeDot() : '3'"
-						(mouseover)="hovering.set(i + 1)"
-						(mouseleave)="hovering.set(0)"
-						(click)="clicked.emit({ data: data()[i], key: dataKey() })"
-						stroke-dasharray="0"
-						fill="#fff"
-					></svg:circle>
-				}
-			</svg:g>
-		}
+			x="80"
+			y="387"
+			x1="80"
+			y1="387"
+			x2="470"
+			y2="387"
+		></svg:line>
 	`,
 })
-export class Line {
+export class XAxis {
 	public readonly width = signal<number>(0);
 	public readonly height = signal<number>(0);
 	public readonly innerBounds = signal<InnerBounds>({ innerHeight: 0, innerWidth: 0 });
