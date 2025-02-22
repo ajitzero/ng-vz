@@ -14,7 +14,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 					<li>
 						<a
 							class="block rounded-lg px-2 py-1 text-slate-950 hover:bg-slate-100 hover:text-slate-800 hover:outline hover:outline-slate-300"
-							[href]="link.href"
+							[href]="link.url"
 						>
 							{{ link.title }}
 							@if (link.wip) {
@@ -32,7 +32,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 })
 export class ExamplesMenuComponent {
 	protected readonly links = [
-		{ title: 'SimpleLineChart', href: '/examples/SimpleLineChart', wip: true },
-		{ title: 'TinyLineChart', href: '/examples/TinyLineChart' },
+		{ title: 'SimpleLineChart', url: '/examples/SimpleLineChart', wip: true },
+		{ title: 'TinyLineChart', url: '/examples/TinyLineChart' },
 	];
 }

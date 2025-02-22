@@ -7,7 +7,7 @@ import { HeaderComponent } from '../components/header.component';
 	standalone: true,
 	imports: [RouterOutlet, ExamplesMenuComponent, HeaderComponent],
 	template: `
-		<docs-header />
+		<docs-header urlPrefix="/examples" />
 		<div class="md:flex">
 			<docs-examples-menu />
 			<main class="grow-1">

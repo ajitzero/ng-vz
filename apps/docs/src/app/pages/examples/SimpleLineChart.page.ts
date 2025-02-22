@@ -5,7 +5,7 @@ import { CartesianChart, DataPointClickEvent, Line, ResponsiveContainer } from '
 import { MOCK_DATA } from '../../mocks';
 
 export const routeMeta: RouteMeta = {
-	title: 'SimpleLineChart | Examples | ng-vz',
+	title: 'SimpleLineChart',
 };
 
 @Component({

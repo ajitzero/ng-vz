@@ -1,7 +1,10 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { AsyncPipe, JsonPipe } from '@angular/common';
+import { ChangeDetectionStrategy, Component, inject, input } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
 	selector: 'docs-header',
+	imports: [JsonPipe, AsyncPipe],
 	standalone: true,
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	template: `
@@ -11,7 +14,17 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 		>
 			<- Back
 		</a>
-		<h2 class="flex items-center">
+		@if (activePage) {
+			<h1 class="flex items-center">
+				<a
+					class="z-10 rounded-lg px-2 py-1 text-slate-950 hover:bg-slate-100 hover:text-slate-800 hover:outline hover:outline-slate-300"
+					[href]="urlPrefix() + '/' + page.url"
+				>
+					{{ page.title }}
+				</a>
+			</h1>
+		}
+		<div class="flex items-center">
 			<a
 				class="z-10 rounded-lg px-2 py-1 text-slate-950 hover:bg-slate-100 hover:text-slate-800 hover:outline hover:outline-slate-300"
 				href="https://github.com/ajitzero"
@@ -25,10 +38,28 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 			>
 				ng-vz
 			</a>
-		</h2>
+		</div>
 	`,
 	host: {
 		class: 'flex justify-between border-b border-slate-300 bg-slate-200 px-2 py-2',
 	},
 })
-export class HeaderComponent {}
+export class HeaderComponent {
+	private readonly route = inject(ActivatedRoute);
+	private readonly children = this.route.routeConfig?.children ?? [];
+	protected readonly activePage = this.children.find(item =>
+		(item as any)?._loadedRoutes?.some((route: { title: string | undefined }) => Boolean(route?.title)),
+	);
+
+	public readonly urlPrefix = input.required<string>();
+
+	/**
+	 * There has to be a better way to do this.
+	 */
+	protected readonly page = {
+		title:
+			(this.activePage as any)._loadedRoutes.find((route: { title: string | undefined }) => Boolean(route?.title))
+				?.title ?? '',
+		url: this.activePage?.path ?? '',
+	};
+}
