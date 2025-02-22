@@ -12,7 +12,11 @@ import { RouterLink } from '@angular/router';
 
 			@for (link of links(); track link.title) {
 				@if (link.external) {
-					<a class="text-cyan-600 underline visited:text-cyan-900 hover:text-cyan-700" [href]="link.url">
+					<a
+						class="text-cyan-600 underline visited:text-cyan-900 hover:text-cyan-700"
+						[href]="link.url"
+						target="_blank"
+					>
 						{{ link.title }}
 						&#x2197;
 					</a>
@@ -35,7 +39,7 @@ export class ExamplesHeroComponent {
 	protected readonly links = computed(() => {
 		const link = this.link();
 		return [
-			{ title: 'Recharts Docs', url: `/examples/${link}`, external: true },
+			{ title: 'Recharts Docs', url: `https://recharts.org/en-US/examples/${link}`, external: true },
 			{
 				title: 'View Source Code',
 				url: `https://github.com/ajitzero/ng-vz/blob/main/apps/docs/src/app/pages/examples/${link}.page.ts`,

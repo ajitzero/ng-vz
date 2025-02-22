@@ -8,18 +8,6 @@ import { RouterLink } from '@angular/router';
 		<main class="mx-auto flex-1">
 			<section class="space-y-6 pt-6 pb-8 md:pt-10 md:pb-12 lg:py-32">
 				<div class="flex max-w-[64rem] flex-col items-center gap-4 text-center">
-					<img
-						class="h-12 w-12"
-						src="https://analogjs.org/img/logos/analog-logo.svg"
-						alt="AnalogJs logo. Two red triangles and a white analog wave in front"
-					/>
-					<a
-						class="focus-visible:ring-ring rounded-2xl bg-zinc-200 px-4 py-1.5 text-sm font-medium transition-colors focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none"
-						target="_blank"
-						href="https://twitter.com/analogjs"
-					>
-						Follow along on Twitter
-					</a>
 					<h1 class="font-heading text-3xl font-medium sm:text-5xl md:text-6xl lg:text-7xl">
 						<span class="text-emerald-600">ng-vz.</span>
 						Composable Angular directives for visualisations.
