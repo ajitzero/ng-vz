@@ -5,5 +5,5 @@ export type InnerBounds = { innerWidth: number; innerHeight: number };
 export type DataPointClickEvent = { data: Record<string, Primitive>; key: string };
 
 export type LineChartSettings = {
-	skipSmoothing: boolean;
+	enableSmoothing: boolean;
 };

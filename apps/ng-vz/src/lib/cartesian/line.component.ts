@@ -48,8 +48,13 @@ export class Line {
 	public readonly innerBounds = signal<InnerBounds>({ innerHeight: 0, innerWidth: 0 });
 	public readonly data = signal<Record<string, Primitive>[]>([]);
 
+	/**
+	 * Data point identifier. Excepts this key to exist in `data`.
+	 */
 	public readonly dataKey = input.required<string>();
 
+	// Inputs for forwarding SVG attributes
+	// TODO: consider merging these into a single input.
 	public readonly stroke = input('#000');
 	public readonly strokeWidth = input('2', { alias: 'stroke-width' });
 	public readonly strokeLinecap = input('round', { alias: 'stroke-linecap' });
@@ -63,21 +68,30 @@ export class Line {
 
 	protected readonly hovering = signal<number>(0);
 
+	/**
+	 * TODO: support InjectionToken for this.
+	 */
 	public readonly vzSettings = input<LineChartSettings, Partial<LineChartSettings>>(DEFAULT_LINE_CHART_SETTINGS, {
 		transform: value => ({ ...DEFAULT_LINE_CHART_SETTINGS, ...value }),
 	});
 
+	/**
+	 * Common logic for all charts.
+	 */
 	private readonly base = computed(() => {
 		const { innerWidth, innerHeight } = this.innerBounds();
 		const data = this.data().map(item => item[this.dataKey()] as number);
+		/**
+		 * This added for shifting the point radius, which gets cut off on either end.
+		 * TODO: Find a better way to do this.
+		 */
 		const pointRadiusDelta = 5;
 
 		const xScale = scaleLinear()
 			.domain([-0.05, data.length - 1])
 			.range([pointRadiusDelta, innerWidth + pointRadiusDelta]);
 
-		const maybeDomain = extent(data);
-		const [domainMin, domainMax] = maybeDomain.some(v => v === undefined) ? [0, 1] : (maybeDomain as [number, number]);
+		const [domainMin = 0, domainMax = 1] = extent(data);
 		const buffer = (domainMax - domainMin) * 0.05;
 		const yScale = scaleLinear()
 			.domain([domainMin - buffer, domainMax + buffer])
@@ -86,6 +100,9 @@ export class Line {
 		return { data, xScale, yScale };
 	});
 
+	/**
+	 * Line's path value.
+	 */
 	protected readonly d = computed(() => {
 		const { data, xScale, yScale } = this.base();
 		const settings = this.vzSettings();
@@ -94,13 +111,16 @@ export class Line {
 			.x((_, i) => xScale(i))
 			.y(d => yScale(d));
 
-		if (!settings.skipSmoothing) {
+		if (settings.enableSmoothing) {
 			lineGenerator = lineGenerator.curve(curveCatmullRom);
 		}
 
 		return lineGenerator(data) ?? '';
 	});
 
+	/**
+	 * Line's points, Required for hovering.
+	 */
 	protected readonly points = computed(() => {
 		const { data, xScale, yScale } = this.base();
 
