@@ -30,6 +30,7 @@ import { DataPointClickEvent, InnerBounds, LineChartSettings } from '../types';
 						[attr.width]="width()"
 						[attr.stroke]="stroke()"
 						[attr.stroke-width]="strokeWidth()"
+						[attr.stroke-dasharray]="'0,0'"
 						[attr.r]="hovering() - 1 === i ? activeDot() : '3'"
 						(mouseover)="hovering.set(i + 1)"
 						(mouseleave)="hovering.set(0)"
