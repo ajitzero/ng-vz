@@ -1,7 +1,7 @@
 import { RouteMeta } from '@analogjs/router';
 import { DOCUMENT } from '@angular/common';
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
-import { DataPointClickEvent, Line, LineChart, ResponsiveContainer } from 'ng-vz';
+import { CartesianChart, DataPointClickEvent, Line, ResponsiveContainer } from 'ng-vz';
 import { MOCK_DATA } from '../../mocks';
 
 export const routeMeta: RouteMeta = {
@@ -10,7 +10,7 @@ export const routeMeta: RouteMeta = {
 
 @Component({
 	selector: 'docs-home',
-	imports: [LineChart, Line, ResponsiveContainer],
+	imports: [CartesianChart, Line, ResponsiveContainer],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	template: `
 		<div class="mx-auto max-w-3xl px-5 pt-20 pb-10">
@@ -34,7 +34,7 @@ export const routeMeta: RouteMeta = {
 			<h2 class="pt-10 pb-2 text-2xl font-bold">Default, Curved Lines</h2>
 			<div class="relative h-[350px] w-full">
 				<vz-responsive-container class="outline">
-					<vz-line-chart class="outline" [height]="300" [width]="600" [data]="data">
+					<vz-cartesian-chart class="outline" [height]="300" [width]="600" [data]="data">
 						<ng-container vzTitle>Tiny Line Chart (Default, Curved Lines)</ng-container>
 						<ng-container vzDesc>A sample chart for demonstrating the usage of the ng-vz library.</ng-container>
 
@@ -46,33 +46,33 @@ export const routeMeta: RouteMeta = {
 							stroke="darkblue"
 							stroke-width="3"
 						></svg:g>
-					</vz-line-chart>
+					</vz-cartesian-chart>
 				</vz-responsive-container>
 			</div>
 
 			<h2 class="pt-10 pb-2 text-2xl font-bold">Sharp Lines</h2>
 			<div class="relative h-[350px] w-full">
 				<vz-responsive-container class="outline">
-					<vz-line-chart class="outline" [height]="300" [width]="600" [data]="data">
+					<vz-cartesian-chart class="outline" [height]="300" [width]="600" [data]="data">
 						<ng-container vzTitle>Tiny Line Chart (Sharp Lines)</ng-container>
 						<ng-container vzDesc>A sample chart for demonstrating the usage of the ng-vz library.</ng-container>
 
 						<svg:g vzLine dataKey="uv" stroke="blue" stroke-width="2"></svg:g>
 						<svg:g vzLine dataKey="pv" stroke="darkblue" stroke-width="3"></svg:g>
-					</vz-line-chart>
+					</vz-cartesian-chart>
 				</vz-responsive-container>
 			</div>
 
 			<h2 class="pt-10 pb-2 text-2xl font-bold">Mixed Lines</h2>
 			<div class="relative h-[350px] w-full">
 				<vz-responsive-container class="outline">
-					<vz-line-chart class="outline" [height]="300" [width]="600" [data]="data">
+					<vz-cartesian-chart class="outline" [height]="300" [width]="600" [data]="data">
 						<ng-container vzTitle>Tiny Line Chart (Mixed Lines)</ng-container>
 						<ng-container vzDesc>A sample chart for demonstrating the usage of the ng-vz library.</ng-container>
 
 						<svg:g vzLine dataKey="uv" stroke="blue" stroke-width="2"></svg:g>
 						<svg:g vzLine dataKey="pv" stroke="darkblue" stroke-width="3"></svg:g>
-					</vz-line-chart>
+					</vz-cartesian-chart>
 				</vz-responsive-container>
 			</div>
 
@@ -83,7 +83,7 @@ export const routeMeta: RouteMeta = {
 			</p>
 			<div class="relative h-[350px] w-full">
 				<vz-responsive-container class="outline">
-					<vz-line-chart [height]="300" [width]="600" [data]="data">
+					<vz-cartesian-chart [height]="300" [width]="600" [data]="data">
 						<ng-container vzTitle>Tiny Line Chart (Mixed Lines)</ng-container>
 						<ng-container vzDesc>A sample chart for demonstrating the usage of the ng-vz library.</ng-container>
 
@@ -106,7 +106,7 @@ export const routeMeta: RouteMeta = {
 							stroke-width="2"
 							stroke-dasharray="2,4"
 						></svg:g>
-					</vz-line-chart>
+					</vz-cartesian-chart>
 				</vz-responsive-container>
 			</div>
 		</div>
@@ -118,7 +118,7 @@ export const routeMeta: RouteMeta = {
 			<p class="pb-10">You can click on the dots to see the data point in this example.</p>
 			<div class="relative h-[350px] w-full">
 				<vz-responsive-container class="outline">
-					<vz-line-chart [height]="450" [width]="600" [data]="longerData">
+					<vz-cartesian-chart [height]="450" [width]="600" [data]="longerData">
 						<ng-container vzTitle>Tiny Line Chart within a Responsive Container</ng-container>
 						<ng-container vzDesc>A sample chart for demonstrating the usage of the ng-vz library.</ng-container>
 
@@ -149,7 +149,7 @@ export const routeMeta: RouteMeta = {
 							stroke-width="2"
 							stroke-dasharray="2,4"
 						></svg:g>
-					</vz-line-chart>
+					</vz-cartesian-chart>
 				</vz-responsive-container>
 			</div>
 		</div>

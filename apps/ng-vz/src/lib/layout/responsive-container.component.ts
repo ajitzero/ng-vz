@@ -11,7 +11,7 @@ import {
 } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { debounceTime, fromEvent } from 'rxjs';
-import { LineChart } from '../charts';
+import { CartesianChart } from '../charts';
 import { CssNumberValue } from '../types/css';
 
 @Component({
@@ -30,7 +30,7 @@ export class ResponsiveContainer {
 	// eslint-disable-next-line @typescript-eslint/no-non-null-assertion, @typescript-eslint/no-non-null-asserted-optional-chain
 	private readonly window = this.document?.defaultView!;
 
-	private readonly chart = contentChild(LineChart);
+	private readonly chart = contentChild(CartesianChart);
 
 	public readonly height = input<CssNumberValue>('auto');
 	public readonly width = input<CssNumberValue>('auto');
@@ -56,9 +56,9 @@ export class ResponsiveContainer {
 			const chart = this.chart();
 			// These signals are needed to trigger the effect
 			// eslint-disable-next-line @typescript-eslint/no-unused-vars
-			const _height = this.height();
+			const linkedHeight = this.height();
 			// eslint-disable-next-line @typescript-eslint/no-unused-vars
-			const _width = this.width();
+			const linkedWidth = this.width();
 			// eslint-disable-next-line @typescript-eslint/no-unused-vars
 			const _resizingEvent = this.resizingEvent();
 
@@ -67,8 +67,8 @@ export class ResponsiveContainer {
 				const style = this.window?.getComputedStyle(element);
 				if (!style) return;
 
-				chart._height.set(element.clientHeight - parseFloat(style.paddingTop) - parseFloat(style.paddingBottom));
-				chart._width.set(element.clientWidth - parseFloat(style.paddingLeft) - parseFloat(style.paddingRight));
+				chart.linkedHeight.set(element.clientHeight - parseFloat(style.paddingTop) - parseFloat(style.paddingBottom));
+				chart.linkedWidth.set(element.clientWidth - parseFloat(style.paddingLeft) - parseFloat(style.paddingRight));
 			}
 		});
 	}

@@ -5,12 +5,11 @@ import type { GapInput, InnerBounds } from '../types';
 /**
  * Base cartesian chart requirements
  */
-export abstract class CartesianChart {
+export abstract class BaseCartesianChart {
 	/**
 	 * Data Source
 	 */
 	public readonly data!: Signal<Record<string, Primitive>[]>;
-
 	/**
 	 * Initial height of the chart
 	 */
@@ -24,13 +23,13 @@ export abstract class CartesianChart {
 	 *
 	 * @internal
 	 */
-	public readonly _height!: WritableSignal<number>;
+	public readonly linkedHeight!: WritableSignal<number>;
 	/**
 	 * These are used to allow the chart to be resized dynamically.
 	 *
 	 * @internal
 	 */
-	public readonly _width!: WritableSignal<number>;
+	public readonly linkedWidth!: WritableSignal<number>;
 	/**
 	 * Optional. Gap between the chart and the edges of the container
 	 *
