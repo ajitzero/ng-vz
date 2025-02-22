@@ -1,7 +1,9 @@
 import { ChangeDetectionStrategy, Component, computed, input } from '@angular/core';
+import { RouterLink } from '@angular/router';
 
 @Component({
 	selector: 'docs-examples-hero',
+	imports: [RouterLink],
 	standalone: true,
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	template: `
@@ -9,12 +11,16 @@ import { ChangeDetectionStrategy, Component, computed, input } from '@angular/co
 			<h2 class="pb-5 text-4xl font-extrabold">{{ name() }}</h2>
 
 			@for (link of links(); track link.title) {
-				<a class="text-cyan-600 underline visited:text-cyan-900 hover:text-cyan-700" [href]="link.url">
-					{{ link.title }}
-					@if (link.external) {
+				@if (link.external) {
+					<a class="text-cyan-600 underline visited:text-cyan-900 hover:text-cyan-700" [href]="link.url">
+						{{ link.title }}
 						&#x2197;
-					}
-				</a>
+					</a>
+				} @else {
+					<a class="text-cyan-600 underline visited:text-cyan-900 hover:text-cyan-700" [routerLink]="link.url">
+						{{ link.title }}
+					</a>
+				}
 			}
 		</hgroup>
 	`,

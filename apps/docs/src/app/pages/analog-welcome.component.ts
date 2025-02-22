@@ -1,11 +1,9 @@
 import { Component } from '@angular/core';
+import { RouterLink } from '@angular/router';
 
 @Component({
 	selector: 'docs-analog-welcome',
-
-	host: {
-		class: 'flex min-h-screen flex-col text-zinc-900 bg-zinc-50 px-4 pt-8 pb-32',
-	},
+	imports: [RouterLink],
 	template: `
 		<main class="mx-auto flex-1">
 			<section class="space-y-6 pt-6 pb-8 md:pt-10 md:pb-12 lg:py-32">
@@ -36,7 +34,7 @@ import { Component } from '@angular/core';
 					<div class="space-x-4">
 						<a
 							class="focus-visible:ring-ring ring-offset-background inline-flex h-11 items-center justify-center rounded-md bg-zinc-950 px-8 text-sm font-medium text-zinc-50 transition-colors hover:bg-zinc-950/90 focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none disabled:pointer-events-none disabled:opacity-50"
-							href="/examples"
+							routerLink="/examples"
 						>
 							Examples
 						</a>
@@ -53,10 +51,8 @@ import { Component } from '@angular/core';
 			</section>
 		</main>
 	`,
+	host: {
+		class: 'flex min-h-screen flex-col text-zinc-900 bg-zinc-50 px-4 pt-8 pb-32',
+	},
 })
-export class AnalogWelcomeComponent {
-	public count = 0;
-	public increment() {
-		this.count++;
-	}
-}
+export class AnalogWelcomeComponent {}

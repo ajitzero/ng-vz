@@ -1,16 +1,15 @@
-import { AsyncPipe, JsonPipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component, inject, input } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, RouterLink } from '@angular/router';
 
 @Component({
 	selector: 'docs-header',
-	imports: [JsonPipe, AsyncPipe],
+	imports: [RouterLink],
 	standalone: true,
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	template: `
 		<a
 			class="rounded-lg px-2 py-1 text-slate-950 hover:bg-slate-100 hover:text-slate-800 hover:outline hover:outline-slate-300"
-			href="/"
+			routerLink="/"
 		>
 			<- Back
 		</a>
@@ -18,7 +17,7 @@ import { ActivatedRoute } from '@angular/router';
 			<h1 class="flex items-center">
 				<a
 					class="z-10 rounded-lg px-2 py-1 text-slate-950 hover:bg-slate-100 hover:text-slate-800 hover:outline hover:outline-slate-300"
-					[href]="urlPrefix() + '/' + page.url"
+					[routerLink]="urlPrefix() + '/' + page.url"
 				>
 					{{ page.title }}
 				</a>

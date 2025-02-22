@@ -1,8 +1,9 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { RouterLink } from '@angular/router';
 
 @Component({
 	selector: 'docs-examples-menu',
-	standalone: true,
+	imports: [RouterLink],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	template: `
 		<nav
@@ -14,7 +15,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 					<li>
 						<a
 							class="block rounded-lg px-2 py-1 text-slate-950 hover:bg-slate-100 hover:text-slate-800 hover:outline hover:outline-slate-300"
-							[href]="link.url"
+							[routerLink]="link.url"
 						>
 							{{ link.title }}
 							@if (link.wip) {
