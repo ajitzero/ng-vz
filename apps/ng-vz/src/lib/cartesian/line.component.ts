@@ -1,9 +1,8 @@
-import { ChangeDetectionStrategy, Component, computed, input, output, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, input, linkedSignal, output, signal } from '@angular/core';
 import { extent, Primitive } from 'd3-array';
 import { scaleLinear } from 'd3-scale';
 import { curveCatmullRom, line } from 'd3-shape';
-import { DEFAULT_LINE_CHART_SETTINGS } from '../constants';
-import { DataPointClickEvent, InnerBounds, LineChartSettings } from '../types';
+import { CartesianChartSettings, DataPointClickEvent, InnerBounds } from '../types';
 
 @Component({
 	selector: 'g[vzLine]',
@@ -48,6 +47,7 @@ export class Line {
 	public readonly height = signal<number>(0);
 	public readonly innerBounds = signal<InnerBounds>({ innerHeight: 0, innerWidth: 0 });
 	public readonly data = signal<Record<string, Primitive>[]>([]);
+	public readonly linkedSettings = linkedSignal(() => this.vzSettings());
 
 	/**
 	 * Data point identifier. Excepts this key to exist in `data`.
@@ -72,9 +72,7 @@ export class Line {
 	/**
 	 * TODO: support InjectionToken for this.
 	 */
-	public readonly vzSettings = input<LineChartSettings, Partial<LineChartSettings>>(DEFAULT_LINE_CHART_SETTINGS, {
-		transform: value => ({ ...DEFAULT_LINE_CHART_SETTINGS, ...value }),
-	});
+	public readonly vzSettings = input<Partial<CartesianChartSettings>>({});
 
 	/**
 	 * Common logic for all charts.
@@ -106,7 +104,7 @@ export class Line {
 	 */
 	protected readonly d = computed(() => {
 		const { data, xScale, yScale } = this.base();
-		const settings = this.vzSettings();
+		const settings = this.linkedSettings();
 
 		let lineGenerator = line<number>()
 			.x((_, i) => xScale(i))

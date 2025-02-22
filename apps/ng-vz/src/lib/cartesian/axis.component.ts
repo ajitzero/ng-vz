@@ -2,8 +2,8 @@ import { ChangeDetectionStrategy, Component, computed, input, output, signal } f
 import { extent, Primitive } from 'd3-array';
 import { scaleLinear } from 'd3-scale';
 import { curveCatmullRom, line } from 'd3-shape';
-import { DEFAULT_LINE_CHART_SETTINGS } from '../constants';
-import { DataPointClickEvent, InnerBounds, LineChartSettings } from '../types';
+import { DEFAULT_CARTERSIAN_CHART_SETTINGS } from '../constants';
+import { CartesianChartSettings, DataPointClickEvent, InnerBounds } from '../types';
 
 @Component({
 	selector: 'g[vzXAxis]',
@@ -57,9 +57,12 @@ export class XAxis {
 	/**
 	 * TODO: support InjectionToken for this.
 	 */
-	public readonly vzSettings = input<LineChartSettings, Partial<LineChartSettings>>(DEFAULT_LINE_CHART_SETTINGS, {
-		transform: value => ({ ...DEFAULT_LINE_CHART_SETTINGS, ...value }),
-	});
+	public readonly vzSettings = input<CartesianChartSettings, Partial<CartesianChartSettings>>(
+		DEFAULT_CARTERSIAN_CHART_SETTINGS,
+		{
+			transform: value => ({ ...DEFAULT_CARTERSIAN_CHART_SETTINGS, ...value }),
+		},
+	);
 
 	/**
 	 * Common logic for all charts.

@@ -2,7 +2,7 @@ import { RouteMeta } from '@analogjs/router';
 import { DOCUMENT } from '@angular/common';
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { CartesianChart, DataPointClickEvent, Line, ResponsiveContainer } from 'ng-vz';
-import { MOCK_DATA } from '../../mocks';
+import { MockDataService } from './mock-data.service';
 
 export const routeMeta: RouteMeta = {
 	title: 'SimpleLineChart',
@@ -30,30 +30,30 @@ export const routeMeta: RouteMeta = {
 				</a>
 			</hgroup>
 
-			<h2 class="pt-10 pb-2 text-2xl font-bold">Default, Curved Lines</h2>
+			<h2 class="pt-10 pb-2 text-2xl font-bold">Curved Lines</h2>
 			<div class="relative h-[200px] w-full lg:h-[350px]">
 				<vz-responsive-container class="outline">
-					<vz-cartesian-chart class="outline" [height]="300" [width]="600" [data]="data">
-						<ng-container vzTitle>Tiny Line Chart (Default, Curved Lines)</ng-container>
+					<vz-cartesian-chart
+						class="outline"
+						[vzSettings]="{ enableSmoothing: true }"
+						[height]="300"
+						[width]="600"
+						[data]="data"
+					>
+						<ng-container vzTitle>Tiny Line Chart (Curved Lines)</ng-container>
 						<ng-container vzDesc>A sample chart for demonstrating the usage of the ng-vz library.</ng-container>
 
-						<svg:g [vzSettings]="{ enableSmoothing: true }" vzLine dataKey="uv" stroke="blue" stroke-width="2"></svg:g>
-						<svg:g
-							[vzSettings]="{ enableSmoothing: true }"
-							vzLine
-							dataKey="pv"
-							stroke="darkblue"
-							stroke-width="3"
-						></svg:g>
+						<svg:g vzLine dataKey="uv" stroke="blue" stroke-width="2"></svg:g>
+						<svg:g vzLine dataKey="pv" stroke="darkblue" stroke-width="3"></svg:g>
 					</vz-cartesian-chart>
 				</vz-responsive-container>
 			</div>
 
-			<h2 class="pt-10 pb-2 text-2xl font-bold">Sharp Lines</h2>
+			<h2 class="pt-10 pb-2 text-2xl font-bold">Default, Sharp Lines</h2>
 			<div class="relative h-[200px] w-full lg:h-[350px]">
 				<vz-responsive-container class="outline">
 					<vz-cartesian-chart class="outline" [height]="300" [width]="600" [data]="data">
-						<ng-container vzTitle>Tiny Line Chart (Sharp Lines)</ng-container>
+						<ng-container vzTitle>Tiny Line Chart (Default, Sharp Lines)</ng-container>
 						<ng-container vzDesc>A sample chart for demonstrating the usage of the ng-vz library.</ng-container>
 
 						<svg:g vzLine dataKey="uv" stroke="blue" stroke-width="2"></svg:g>
@@ -70,12 +70,18 @@ export const routeMeta: RouteMeta = {
 						<ng-container vzDesc>A sample chart for demonstrating the usage of the ng-vz library.</ng-container>
 
 						<svg:g vzLine dataKey="uv" stroke="blue" stroke-width="2"></svg:g>
-						<svg:g vzLine dataKey="pv" stroke="darkblue" stroke-width="3"></svg:g>
+						<svg:g
+							[vzSettings]="{ enableSmoothing: true }"
+							vzLine
+							dataKey="pv"
+							stroke="darkblue"
+							stroke-width="3"
+						></svg:g>
 					</vz-cartesian-chart>
 				</vz-responsive-container>
 			</div>
 
-			<h2 class="pt-10 pb-2 text-2xl font-bold">With duplicates</h2>
+			<h2 class="pt-10 pb-2 text-2xl font-bold">With duplicates & variations: dotted, dashed</h2>
 			<p class="pb-10">
 				Same data points can be used multiple times, usually for different types of line: curved/sharp, dashed/dotted or
 				mixing with other types like bar charts.
@@ -159,19 +165,12 @@ export const routeMeta: RouteMeta = {
 	`,
 })
 export default class SimpleLineChartComponent {
+	private readonly mockDataService = inject(MockDataService);
 	private readonly document = inject(DOCUMENT);
 	private readonly window = this.document.defaultView;
 
-	private readonly baseData = MOCK_DATA;
-	private readonly reversedData = [...this.baseData].reverse();
-
-	protected readonly data = this.baseData.map((item, index) => ({
-		...item,
-		jv: this.reversedData[index].uv,
-		kv: this.reversedData[index].pv,
-	}));
-
-	protected readonly longerData = [...this.data, ...this.data];
+	protected readonly data = this.mockDataService.data;
+	protected readonly longerData = this.mockDataService.longerData;
 
 	protected handleClick(data: DataPointClickEvent) {
 		if (this.window) {

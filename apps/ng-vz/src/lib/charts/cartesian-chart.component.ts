@@ -9,8 +9,8 @@ import {
 } from '@angular/core';
 import type { Primitive } from 'd3-array';
 import { Line } from '../cartesian';
-import { DEFAULT_GAPS } from '../constants';
-import type { GapInput } from '../types';
+import { DEFAULT_CARTERSIAN_CHART_SETTINGS, DEFAULT_GAPS } from '../constants';
+import type { CartesianChartSettings, GapInput } from '../types';
 
 @Component({
 	selector: 'vz-cartesian-chart',
@@ -60,6 +60,12 @@ export class CartesianChart {
 			return { ...DEFAULT_GAPS, ...value };
 		},
 	});
+	public readonly vzSettings = input<CartesianChartSettings, Partial<CartesianChartSettings>>(
+		DEFAULT_CARTERSIAN_CHART_SETTINGS,
+		{
+			transform: value => ({ ...DEFAULT_CARTERSIAN_CHART_SETTINGS, ...value }),
+		},
+	);
 	/**
 	 * These are used to allow the chart to be resized dynamically.
 	 *
@@ -146,6 +152,7 @@ export class CartesianChart {
 				line.height.set(this.finalHeight());
 				line.innerBounds.set(this.innerBounds());
 				line.data.set(this.data());
+				line.linkedSettings.update(settings => ({ ...this.vzSettings(), ...settings }));
 			}
 		});
 	}
