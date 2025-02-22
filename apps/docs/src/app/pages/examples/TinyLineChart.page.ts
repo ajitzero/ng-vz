@@ -96,7 +96,7 @@ export const routeMeta: RouteMeta = {
 							dataKey="jv"
 							stroke="darkgreen"
 							stroke-width="3"
-							stroke-dasharray="5,5"
+							stroke-dasharray="5 5"
 						></svg:g>
 						<svg:g
 							[vzSettings]="{ enableSmoothing: true }"
@@ -104,7 +104,7 @@ export const routeMeta: RouteMeta = {
 							dataKey="kv"
 							stroke="red"
 							stroke-width="2"
-							stroke-dasharray="2,4"
+							stroke-dasharray="2 4"
 						></svg:g>
 					</vz-cartesian-chart>
 				</vz-responsive-container>
@@ -151,7 +151,7 @@ export const routeMeta: RouteMeta = {
 							dataKey="kv"
 							stroke="red"
 							stroke-width="2"
-							stroke-dasharray="2,4"
+							stroke-dasharray="2 4"
 						></svg:g>
 					</vz-cartesian-chart>
 				</vz-responsive-container>
