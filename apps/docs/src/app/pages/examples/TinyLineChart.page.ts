@@ -32,7 +32,7 @@ export const routeMeta: RouteMeta = {
 			</hgroup>
 
 			<h2 class="pt-10 pb-2 text-2xl font-bold">Default, Curved Lines</h2>
-			<div class="relative h-[350px] w-full">
+			<div class="relative h-[200px] w-full md:h-[350px]">
 				<vz-responsive-container class="outline">
 					<vz-cartesian-chart class="outline" [height]="300" [width]="600" [data]="data">
 						<ng-container vzTitle>Tiny Line Chart (Default, Curved Lines)</ng-container>
@@ -51,7 +51,7 @@ export const routeMeta: RouteMeta = {
 			</div>
 
 			<h2 class="pt-10 pb-2 text-2xl font-bold">Sharp Lines</h2>
-			<div class="relative h-[350px] w-full">
+			<div class="relative h-[200px] w-full md:h-[350px]">
 				<vz-responsive-container class="outline">
 					<vz-cartesian-chart class="outline" [height]="300" [width]="600" [data]="data">
 						<ng-container vzTitle>Tiny Line Chart (Sharp Lines)</ng-container>
@@ -64,7 +64,7 @@ export const routeMeta: RouteMeta = {
 			</div>
 
 			<h2 class="pt-10 pb-2 text-2xl font-bold">Mixed Lines</h2>
-			<div class="relative h-[350px] w-full">
+			<div class="relative h-[200px] w-full md:h-[350px]">
 				<vz-responsive-container class="outline">
 					<vz-cartesian-chart class="outline" [height]="300" [width]="600" [data]="data">
 						<ng-container vzTitle>Tiny Line Chart (Mixed Lines)</ng-container>
@@ -81,10 +81,10 @@ export const routeMeta: RouteMeta = {
 				Same data points can be used multiple times, usually for different types of line: curved/sharp, dashed/dotted or
 				mixing with other types like bar charts.
 			</p>
-			<div class="relative h-[350px] w-full">
+			<div class="relative h-[200px] w-full md:h-[350px]">
 				<vz-responsive-container class="outline">
 					<vz-cartesian-chart [height]="300" [width]="600" [data]="data">
-						<ng-container vzTitle>Tiny Line Chart (Mixed Lines)</ng-container>
+						<ng-container vzTitle>Tiny Line Chart (With duplicates)</ng-container>
 						<ng-container vzDesc>A sample chart for demonstrating the usage of the ng-vz library.</ng-container>
 
 						<svg:g [vzSettings]="{ enableSmoothing: true }" vzLine dataKey="uv" stroke="blue" stroke-width="2"></svg:g>
@@ -111,19 +111,23 @@ export const routeMeta: RouteMeta = {
 			</div>
 		</div>
 		<div class="px-5 pb-10">
-			<h2 class="pt-10 pb-2 text-2xl font-bold">With Responsive Container</h2>
-			<p class="pb-1">
-				A responsive container uses position absolute, so it requires a parent element with a defined width and height.
-			</p>
-			<p class="pb-10">You can click on the dots to see the data point in this example.</p>
-			<div class="relative h-[350px] w-full">
+			<div class="max-w-3xl">
+				<h2 class="pt-10 pb-2 text-2xl font-bold">With Responsive Container</h2>
+				<p class="pb-1">
+					A responsive container uses position absolute, so it requires a parent element positioned as
+					<code>relative</code>
+					with a defined height and width.
+				</p>
+				<p class="pb-10">You can click on the dots to see the data point in this example.</p>
+			</div>
+			<div class="relative h-[200px] w-full md:h-[350px]">
 				<vz-responsive-container class="outline">
 					<vz-cartesian-chart [height]="450" [width]="600" [data]="longerData">
 						<ng-container vzTitle>Tiny Line Chart within a Responsive Container</ng-container>
 						<ng-container vzDesc>A sample chart for demonstrating the usage of the ng-vz library.</ng-container>
 
 						<svg:g
-							[activeDot]="8"
+							[activeDot]="5"
 							[vzSettings]="{ enableSmoothing: true }"
 							(clicked)="handleClick($event)"
 							vzLine
@@ -132,7 +136,7 @@ export const routeMeta: RouteMeta = {
 							stroke-width="2"
 						></svg:g>
 						<svg:g
-							[activeDot]="8"
+							[activeDot]="5"
 							[vzSettings]="{ enableSmoothing: true }"
 							(clicked)="handleClick($event)"
 							vzLine
@@ -141,7 +145,7 @@ export const routeMeta: RouteMeta = {
 							stroke-width="3"
 						></svg:g>
 						<svg:g
-							[activeDot]="8"
+							[activeDot]="5"
 							(clicked)="handleClick($event)"
 							vzLine
 							dataKey="kv"
