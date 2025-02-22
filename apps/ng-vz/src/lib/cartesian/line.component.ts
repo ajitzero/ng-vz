@@ -60,7 +60,7 @@ export class Line {
 	public readonly strokeWidth = input('2', { alias: 'stroke-width' });
 	public readonly strokeLinecap = input('round', { alias: 'stroke-linecap' });
 	public readonly strokeLinejoin = input('round', { alias: 'stroke-linejoin' });
-	public readonly strokeDasharray = input('', { alias: 'stroke-dasharray' });
+	public readonly strokeDasharray = input('0', { alias: 'stroke-dasharray' });
 
 	public readonly defaultDot = input(3);
 	public readonly activeDot = input(3);
