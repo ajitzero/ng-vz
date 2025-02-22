@@ -48,6 +48,7 @@ export class HeaderComponent {
 	private readonly route = inject(ActivatedRoute);
 	private readonly children = this.route.routeConfig?.children ?? [];
 	protected readonly activePage = this.children.find(item =>
+		// eslint-disable-next-line @typescript-eslint/no-explicit-any
 		(item as any)?._loadedRoutes?.some((route: { title: string | undefined }) => Boolean(route?.title)),
 	);
 
@@ -58,6 +59,7 @@ export class HeaderComponent {
 	 */
 	protected readonly page = {
 		title:
+			// eslint-disable-next-line @typescript-eslint/no-explicit-any
 			(this.activePage as any)._loadedRoutes.find((route: { title: string | undefined }) => Boolean(route?.title))
 				?.title ?? '',
 		url: this.activePage?.path ?? '',
