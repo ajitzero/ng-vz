@@ -1,20 +1,20 @@
 {
 	"type": "module",
-  "dependencies": {
-    "@analogjs/platform": "^1.13.0",
-    "@analogjs/router": "^1.13.0",
-    "@analogjs/vitest-angular": "^1.13.0",
-    "@angular/common": "19.1.5",
-    "@angular/core": "19.1.5",
-    "@angular/platform-browser": "19.1.5",
-    "@angular/platform-browser-dynamic": "19.1.5",
-    "@angular/platform-server": "^19.1.5",
-    "@angular/router": "19.1.5",
-    "@nx/vite": "20.4.2",
-    "d3-array": "^3.2.4",
-    "h3": "1.15.0",
-    "ng-vz": "0.0.1",
-    "vite": "^6.0.0",
-    "zone.js": "~0.15.0"
-  }
+	"dependencies": {
+		"@analogjs/platform": "^1.13.0",
+		"@analogjs/router": "^1.13.0",
+		"@analogjs/vitest-angular": "^1.13.0",
+		"@angular/common": "19.1.5",
+		"@angular/core": "19.1.5",
+		"@angular/platform-browser": "19.1.5",
+		"@angular/platform-browser-dynamic": "19.1.5",
+		"@angular/platform-server": "^19.1.5",
+		"@angular/router": "19.1.5",
+		"@nx/vite": "20.4.2",
+		"d3-array": "^3.2.4",
+		"h3": "1.15.0",
+		"ng-vz": "0.0.1",
+		"vite": "^6.0.0",
+		"zone.js": "~0.15.0"
+	}
 }

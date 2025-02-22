@@ -1,7 +1,12 @@
 {
 	"arrowParens": "avoid",
 	"htmlWhitespaceSensitivity": "ignore",
-	"plugins": ["prettier-plugin-organize-imports", "prettier-plugin-organize-attributes", "prettier-plugin-tailwindcss"],
+	"plugins": [
+		"prettier-plugin-organize-imports",
+		"prettier-plugin-organize-attributes",
+		"prettier-plugin-multiline-arrays",
+		"prettier-plugin-tailwindcss"
+	],
 	"printWidth": 120,
 	"singleQuote": true,
 	"tabWidth": 2,
