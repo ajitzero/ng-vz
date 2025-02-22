@@ -2,6 +2,7 @@ import { RouteMeta } from '@analogjs/router';
 import { DOCUMENT } from '@angular/common';
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { CartesianChart, DataPointClickEvent, Line, ResponsiveContainer } from 'ng-vz';
+import { ExamplesHeroComponent } from '../../components/examples-hero.component';
 import { MockDataService } from './mock-data.service';
 
 export const routeMeta: RouteMeta = {
@@ -9,26 +10,11 @@ export const routeMeta: RouteMeta = {
 };
 
 @Component({
-	imports: [CartesianChart, Line, ResponsiveContainer],
+	imports: [CartesianChart, Line, ResponsiveContainer, ExamplesHeroComponent],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	template: `
 		<div class="mx-auto max-w-3xl px-5 pt-20 pb-10">
-			<hgroup class="flex flex-col items-start gap-2 pb-10">
-				<h1 class="pb-5 text-4xl font-extrabold">TinyLineChart</h1>
-				<a
-					class="text-emerald-600 underline visited:text-emerald-900 hover:text-emerald-700"
-					href="https://recharts.org/en-US/examples/TinyLineChart"
-					target="_blank"
-				>
-					Recharts Docs &#x2197;
-				</a>
-				<a
-					class="text-emerald-600 underline visited:text-emerald-900 hover:text-emerald-700"
-					href="https://github.com/ajitzero/ng-vz/blob/main/apps/docs/src/app/pages/examples/TinyLineChart.page.ts"
-				>
-					View Source Code &#x2197;
-				</a>
-			</hgroup>
+			<docs-examples-hero name="Tiny Line Chart" link="TinyLineChart" />
 
 			<h2 class="pt-10 pb-2 text-2xl font-bold">Curved Lines</h2>
 			<div class="relative h-[200px] w-full lg:h-[350px]">

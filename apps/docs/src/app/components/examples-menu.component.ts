@@ -8,7 +8,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 		<nav
 			class="m-4 min-w-56 rounded border border-slate-200 bg-slate-50 p-4 md:m-0 md:w-64 md:rounded-none md:border-y-0 md:border-s-0 md:border-e"
 		>
-			<h3 class="px-2 pb-2 text-lg font-bold text-slate-950">Examples</h3>
+			<h2 class="px-2 pb-2 text-lg font-bold text-slate-950">Examples</h2>
 			<ul class="list-none p-0">
 				@for (link of links; track link.title) {
 					<li>
