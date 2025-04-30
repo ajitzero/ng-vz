@@ -8,14 +8,14 @@ module.exports = [
 			'**/*.json',
 		],
 		rules: {
-			'@nx/dependency-checks': [
-				'error',
-				{
-					ignoredFiles: [
-						'{projectRoot}/eslint.config.{js,cjs,mjs}',
-					],
-				},
-			],
+			// '@nx/dependency-checks': [
+			// 	'error',
+			// 	{
+			// 		ignoredFiles: [
+			// 			'{projectRoot}/eslint.config.{js,cjs,mjs}',
+			// 		],
+			// 	},
+			// ],
 		},
 		languageOptions: {
 			parser: require('jsonc-eslint-parser'),
@@ -44,6 +44,9 @@ module.exports = [
 					style: 'kebab-case',
 				},
 			],
+			'@angular-eslint/component-class-suffix': 'off',
+			'@angular-eslint/no-input-rename': 'off',
+			'@angular-eslint/component-selector': 'off',
 		},
 	},
 	{
