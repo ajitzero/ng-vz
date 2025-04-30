@@ -20,6 +20,12 @@
 		"paths": {
 			"ng-vz": [
 				"apps/ng-vz/src/index.ts"
+			],
+			"@spartan-ng/ui-breadcrumb-helm": [
+				"libs/ui/ui-breadcrumb-helm/src/index.ts"
+			],
+			"@spartan-ng/ui-icon-helm": [
+				"libs/ui/ui-icon-helm/src/index.ts"
 			]
 		}
 	},

@@ -1,20 +1,64 @@
 import { RouteMeta } from '@analogjs/router';
 import { DOCUMENT } from '@angular/common';
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { RouterLink } from '@angular/router';
+import {
+	HlmBreadcrumbDirective,
+	HlmBreadcrumbItemDirective,
+	HlmBreadcrumbLinkDirective,
+	HlmBreadcrumbListDirective,
+	HlmBreadcrumbPageDirective,
+	HlmBreadcrumbSeparatorComponent,
+} from '@spartan-ng/ui-breadcrumb-helm';
 import { CartesianChart, DataPointClickEvent, Line, ResponsiveContainer } from 'ng-vz';
 import { ExamplesHeroComponent } from '../../components/examples-hero.component';
 import { MockDataService } from './mock-data.service';
 
-export const routeMeta: RouteMeta = {
+const meta = {
 	title: 'TinyLineChart',
+	description: 'A tiny line chart example using ng-vz.',
+	displayName: 'Tiny Line Chart',
+};
+
+export const routeMeta: RouteMeta = {
+	title: meta.title,
 };
 
 @Component({
-	imports: [CartesianChart, Line, ResponsiveContainer, ExamplesHeroComponent],
+	imports: [
+		CartesianChart,
+		Line,
+		ResponsiveContainer,
+		RouterLink,
+
+		HlmBreadcrumbDirective,
+		HlmBreadcrumbSeparatorComponent,
+		HlmBreadcrumbListDirective,
+		HlmBreadcrumbItemDirective,
+		HlmBreadcrumbPageDirective,
+		HlmBreadcrumbLinkDirective,
+		ExamplesHeroComponent,
+	],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	template: `
 		<div class="mx-auto max-w-3xl px-5 pt-20 pb-10">
-			<docs-examples-hero name="Tiny Line Chart" link="TinyLineChart" />
+			<nav class="mb-5" hlmBreadcrumb>
+				<ol hlmBreadcrumbList>
+					<li hlmBreadcrumbItem>
+						<a hlmBreadcrumbLink link="/">Home</a>
+					</li>
+					<li hlmBreadcrumbSeparator></li>
+					<li hlmBreadcrumbItem>
+						<a hlmBreadcrumbLink hlmL link="/examples">Examples</a>
+					</li>
+					<li hlmBreadcrumbSeparator></li>
+					<li hlmBreadcrumbItem>
+						<span hlmBreadcrumbPage>{{ meta.title }}</span>
+					</li>
+				</ol>
+			</nav>
+
+			<docs-examples-hero [name]="meta.displayName" [link]="meta.title" />
 
 			<h2 class="pt-10 pb-2 text-2xl font-bold">Curved Lines</h2>
 			<div class="relative h-[200px] w-full lg:h-[350px]">
@@ -157,6 +201,8 @@ export default class TinyLineChartComponent {
 
 	protected readonly data = this.mockDataService.data;
 	protected readonly longerData = this.mockDataService.longerData;
+
+	protected readonly meta = meta;
 
 	protected handleClick(data: DataPointClickEvent) {
 		if (this.window) {

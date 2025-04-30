@@ -34,10 +34,13 @@ import { RouterLink } from '@angular/router';
 })
 export class ExamplesHeroComponent {
 	public readonly name = input.required<string>();
-	public readonly link = input.required<string>();
+	public readonly link = input<string>();
 
 	protected readonly links = computed(() => {
 		const link = this.link();
+		if (link === undefined) {
+			return [];
+		}
 		return [
 			{ title: 'Recharts Docs', url: `https://recharts.org/en-US/examples/${link}`, external: true },
 			{
