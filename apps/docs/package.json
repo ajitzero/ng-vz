@@ -5,7 +5,7 @@
 		"@analogjs/router": "^1.13.0",
 		"@analogjs/vitest-angular": "^1.13.0",
 		"@angular/common": "19.1.5",
-		"@angular/core": "19.1.5",
+		"@angular/core": "19.2.18",
 		"@angular/platform-browser": "19.1.5",
 		"@angular/platform-browser-dynamic": "19.1.5",
 		"@angular/platform-server": "^19.1.5",
